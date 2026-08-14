@@ -1,0 +1,157 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Infineon Online Assessment</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="exam-container">
+
+        <!-- ================= HEADER ================= -->
+
+        <div class="header">
+
+            <img src="images/infineon-logo.svg"
+                 class="logo"
+                 alt="Infineon Logo">
+
+            <div class="timer">
+
+                Time Left:
+
+                <span id="timer">
+                    60:00
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= CANDIDATE ================= -->
+
+        <h2 id="candidateName"></h2>
+
+
+        <!-- ================= EXAM LAYOUT ================= -->
+
+        <div class="exam-layout">
+
+
+            <!-- ================= LEFT SIDE ================= -->
+
+            <div class="question-section">
+
+                <h2 id="questionNumber"></h2>
+
+
+                <!-- Question -->
+
+                <div class="question-box">
+
+                    <div id="question"></div>
+
+                </div>
+
+
+                <!-- Options -->
+
+                <div class="options-box">
+
+                    <div id="options"></div>
+
+                </div>
+
+
+                <!-- Buttons -->
+
+                <div class="button-row">
+
+                    <button id="prevBtn"
+                            onclick="previousQuestion()">
+
+                        Previous
+
+                    </button>
+
+
+                    <button id="nextBtn"
+                            onclick="nextQuestion()">
+
+                        Next
+
+                    </button>
+
+
+                    <button id="submitBtn"
+                            onclick="submitExam()"
+                            style="display:none;">
+
+                        Submit
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= RIGHT SIDE ================= -->
+
+            <div class="right-panel">
+
+
+                <!-- Camera -->
+
+                <div class="camera-box">
+
+                    <video id="video"
+                           autoplay
+                           muted
+                           playsinline>
+                    </video>
+
+                </div>
+
+
+                <!-- Question Palette -->
+
+                <div class="palette">
+
+    <h3>Question Palette</h3>
+
+    <div id="palette" class="palette-grid"></div>
+
+</div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+<script src="js/questions.js"></script>
+<script src="js/script.js"></script>
+
+<script>
+    startExam();
+    startCamera();
+</script>
+
+</body>
+</html>

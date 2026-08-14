@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Assessment Instructions</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <img src="images/infineon-logo.svg"
+             class="logo"
+             alt="Infineon Logo">
+
+
+        <h2>Assessment Instructions</h2>
+
+        <h3 id="welcome"></h3>
+
+
+        <div class="instructions">
+
+            <p>
+                <strong>Duration:</strong> 60 Minutes
+            </p>
+
+            <p>
+                <strong>Total Questions:</strong> 30
+            </p>
+
+            <p>
+                <strong>Total Marks:</strong> 30
+            </p>
+
+
+            <hr>
+
+
+            <h3>Instructions</h3>
+
+            <ul>
+
+                <li>
+                    Read each question carefully before selecting your answer.
+                </li>
+
+                <li>
+                    The assessment consists of
+                    <strong>30 questions</strong>.
+                </li>
+
+                <li>
+                    The total duration of the assessment is
+                    <strong>60 minutes</strong>.
+                </li>
+
+                <li>
+                    Each question carries
+                    <strong>1 mark</strong>.
+                </li>
+
+                <li>
+                    There is no negative marking unless specified in the question.
+                </li>
+
+                <li>
+                    Use the <strong>Next</strong> and
+                    <strong>Previous</strong> buttons to navigate between questions.
+                </li>
+
+                <li>
+                    You can use the
+                    <strong>Question Palette</strong>
+                    to directly navigate to any question.
+                </li>
+
+                <li>
+                    You may change your selected answer before submitting the assessment.
+                </li>
+
+                <li>
+                    Keep your camera enabled and ensure your face remains visible
+                    throughout the assessment.
+                </li>
+
+                <li>
+                    Do not refresh, close or navigate away from the assessment window.
+                </li>
+
+                <li>
+                    Switching browser tabs or windows may be recorded.
+                </li>
+
+                <li>
+    The use of mobile phones, external websites, AI tools or any other unauthorized resources is strictly prohibited.
+</li>
+
+<li>
+    AI-generated, copied or plagiarized responses may be detected
+    through assessment-integrity checks. Any violation may be reported
+    and may result in immediate disqualification from the assessment.
+</li>
+
+                <li>
+                    Make sure you have a stable internet connection before starting.
+                </li>
+
+                <li>
+                    The assessment will be submitted automatically when the timer
+                    reaches <strong>00:00</strong>.
+                </li>
+
+                <li>
+                    Once the assessment is submitted, you cannot change your answers.
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <br>
+
+
+        <label>
+
+            <input type="checkbox"
+                   id="agree">
+
+            I have read and agree to the assessment instructions.
+
+        </label>
+
+
+        <br>
+        <br>
+
+
+        <button id="continueBtn"
+        disabled
+        onclick="startAssessment()">
+
+    Start Assessment
+</button>
+
+    </div>
+
+
+    <!-- Enable Start button -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+
+<script>
+
+    const agree =
+        document.getElementById("agree");
+
+    const continueBtn =
+        document.getElementById("continueBtn");
+
+    agree.addEventListener("change", function () {
+
+        continueBtn.disabled =
+            !agree.checked;
+
+    });
+
+
+    async function startAssessment() {
+
+        const examCode =
+            localStorage.getItem("examCode");
+
+        if (!examCode) {
+
+            alert("Exam code not found. Please start again.");
+
+            window.location.href = "login.html";
+
+            return;
+        }
+
+        continueBtn.disabled = true;
+        continueBtn.textContent = "Starting...";
+
+
+        try {
+
+            const { data, error } =
+                await supabaseClient
+                    .from("exam_codes")
+                    .update({
+                        used: true,
+                        used_at: new Date().toISOString()
+                    })
+                    .eq("code", examCode)
+                    .eq("used", false)
+                    .select();
+
+
+            if (error) {
+
+                console.error(
+                    "Supabase update error:",
+                    error
+                );
+
+                alert(
+                    "Unable to start the assessment. Please try again."
+                );
+
+                continueBtn.disabled = false;
+                continueBtn.textContent =
+                    "Start Assessment";
+
+                return;
+            }
+
+
+            if (!data || data.length === 0) {
+
+                alert(
+                    "This exam code has already been used. " +
+                    "You cannot attempt the assessment again."
+                );
+
+                window.location.href =
+                    "login.html";
+
+                return;
+            }
+
+
+            // Code successfully marked as USED
+
+            window.location.href =
+                "exam.html";
+
+        }
+        catch (error) {
+
+            console.error(error);
+
+            alert(
+                "Something went wrong. Please try again."
+            );
+
+            continueBtn.disabled = false;
+
+            continueBtn.textContent =
+                "Start Assessment";
+        }
+
+    }
+
+</script>
+
+</body>
+
+</html>

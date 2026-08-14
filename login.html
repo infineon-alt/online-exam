@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Infineon - Candidate Registration</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background: #eef3fb;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .registration-container {
+            width: 550px;
+            margin: 50px auto;
+            padding: 35px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .registration-logo {
+            width: 180px;
+            display: block;
+            margin: 0 auto 25px auto;
+        }
+
+        .registration-title {
+            text-align: center;
+            color: #0d3b8c;
+            margin: 0 0 35px 0;
+            font-size: 28px;
+        }
+
+        /* Hide all steps */
+        .registration-step {
+            display: none !important;
+        }
+
+        /* Show only current step */
+        .registration-step.active {
+            display: block !important;
+        }
+
+        .registration-step h2 {
+            color: #333;
+            font-size: 20px;
+            margin: 0 0 15px 0;
+        }
+
+        .registration-step input {
+            width: 100%;
+            height: 45px;
+
+            padding: 10px 12px;
+
+            border: 1px solid #ccc;
+            border-radius: 6px;
+
+            font-size: 15px;
+            outline: none;
+        }
+
+        .registration-step input:focus {
+            border-color: #0057d8;
+        }
+
+        .registration-error {
+            display: none !important;
+
+            color: #d32f2f;
+            font-size: 14px;
+
+            margin: 8px 0 0 0;
+        }
+
+        .registration-error.show {
+            display: block !important;
+        }
+
+        .registration-buttons {
+            display: flex;
+            gap: 10px;
+            margin-top: 25px;
+        }
+
+        .registration-buttons button {
+            width: auto !important;
+            flex: 1;
+
+            height: 45px;
+
+            margin: 0 !important;
+            padding: 0 !important;
+
+            border: none;
+            border-radius: 6px;
+
+            background: #0057d8;
+            color: white;
+
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .registration-buttons button:hover {
+            background: #003f9e;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="registration-container">
+
+    <img
+        src="images/infineon-logo.svg"
+        class="registration-logo"
+        alt="Infineon"
+    >
+
+    <h1 class="registration-title">
+        Candidate Registration
+    </h1>
+
+
+    <!-- =====================================
+         STEP 1 - NAME
+         ===================================== -->
+
+    <div
+        class="registration-step active"
+        id="registrationStep1"
+    >
+
+        <h2>Enter Your Full Name</h2>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Full Name"
+        >
+
+        <p
+            class="registration-error"
+            id="nameError"
+        >
+            Please enter your full name.
+        </p>
+
+        <div class="registration-buttons">
+
+            <button
+                type="button"
+                onclick="goBack()"
+            >
+                Back
+            </button>
+
+            <button
+                type="button"
+                onclick="goToStep(2)"
+            >
+                Next
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         STEP 2 - EMAIL
+         ===================================== -->
+
+    <div
+        class="registration-step"
+        id="registrationStep2"
+    >
+
+        <h2>Enter Your Email</h2>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Email Address"
+        >
+
+        <p
+            class="registration-error"
+            id="emailError"
+        >
+            Please enter a valid email address.
+        </p>
+
+        <div class="registration-buttons">
+
+            <button
+                type="button"
+                onclick="goToStep(1)"
+            >
+                Back
+            </button>
+
+            <button
+                type="button"
+                onclick="goToStep(3)"
+            >
+                Next
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         STEP 3 - MOBILE
+         ===================================== -->
+
+    <div
+        class="registration-step"
+        id="registrationStep3"
+    >
+
+        <h2>Enter Your Mobile Number</h2>
+
+        <input
+            type="tel"
+            id="mobile"
+            placeholder="Mobile Number"
+            maxlength="10"
+        >
+
+        <p
+            class="registration-error"
+            id="mobileError"
+        >
+            Please enter a valid mobile number.
+        </p>
+
+        <div class="registration-buttons">
+
+            <button
+                type="button"
+                onclick="goToStep(2)"
+            >
+                Back
+            </button>
+
+            <button
+                type="button"
+                onclick="goToStep(4)"
+            >
+                Next
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         STEP 4 - COLLEGE
+         ===================================== -->
+
+    <div
+        class="registration-step"
+        id="registrationStep4"
+    >
+
+        <h2>Enter Your College Name</h2>
+
+        <input
+            type="text"
+            id="college"
+            placeholder="College Name"
+        >
+
+        <p
+            class="registration-error"
+            id="collegeError"
+        >
+            Please enter your college name.
+        </p>
+
+        <div class="registration-buttons">
+
+            <button
+                type="button"
+                onclick="goToStep(3)"
+            >
+                Back
+            </button>
+
+            <button
+                type="button"
+                onclick="goToStep(5)"
+            >
+                Next
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         STEP 5 - EXAM CODE
+         ===================================== -->
+
+    <div
+        class="registration-step"
+        id="registrationStep5"
+    >
+
+        <h2>Enter Your Exam Code</h2>
+
+        <input
+            type="text"
+            id="examCode"
+            placeholder="Enter Exam Code"
+        >
+
+        <p
+            class="registration-error"
+            id="examCodeError"
+        >
+            Please enter your exam code.
+        </p>
+
+        <div class="registration-buttons">
+
+            <button
+                type="button"
+                onclick="goToStep(4)"
+            >
+                Back
+            </button>
+
+            <button
+                type="button"
+                onclick="startExam()"
+            >
+                Start Exam
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+let currentStep = 1;
+
+
+/* ===============================
+   GO TO STEP
+   =============================== */
+
+function goToStep(stepNumber) {
+
+    /*
+       When going forward,
+       validate the current page.
+    */
+
+    if (stepNumber > currentStep) {
+
+        if (!validateStep(currentStep)) {
+            return;
+        }
+
+    }
+
+
+    /*
+       Hide all steps
+    */
+
+    document
+        .querySelectorAll(".registration-step")
+        .forEach(function(step) {
+
+            step.classList.remove("active");
+
+        });
+
+
+    /*
+       Show selected step
+    */
+
+    const selectedStep =
+        document.getElementById(
+            "registrationStep" + stepNumber
+        );
+
+
+    if (selectedStep) {
+
+        selectedStep.classList.add("active");
+
+        currentStep = stepNumber;
+
+    }
+
+}
+
+
+/* ===============================
+   VALIDATION
+   =============================== */
+
+function validateStep(step) {
+
+
+    /* NAME */
+
+    if (step === 1) {
+
+        const name =
+            document.getElementById("name")
+            .value
+            .trim();
+
+        if (name === "") {
+
+            showError("nameError");
+
+            return false;
+
+        }
+
+        hideError("nameError");
+
+        return true;
+    }
+
+
+    /* EMAIL */
+
+    if (step === 2) {
+
+        const email =
+            document.getElementById("email")
+            .value
+            .trim();
+
+        const pattern =
+            /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!pattern.test(email)) {
+
+            showError("emailError");
+
+            return false;
+
+        }
+
+        hideError("emailError");
+
+        return true;
+    }
+
+
+    /* MOBILE */
+
+    if (step === 3) {
+
+        const mobile =
+            document.getElementById("mobile")
+            .value
+            .trim();
+
+        if (!/^[0-9]{10}$/.test(mobile)) {
+
+            showError("mobileError");
+
+            return false;
+
+        }
+
+        hideError("mobileError");
+
+        return true;
+    }
+
+
+    /* COLLEGE */
+
+    if (step === 4) {
+
+        const college =
+            document.getElementById("college")
+            .value
+            .trim();
+
+        if (college === "") {
+
+            showError("collegeError");
+
+            return false;
+
+        }
+
+        hideError("collegeError");
+
+        return true;
+    }
+
+
+    /* EXAM CODE */
+
+    if (step === 5) {
+
+        const examCode =
+            document.getElementById("examCode")
+            .value
+            .trim();
+
+        if (examCode === "") {
+
+            showError("examCodeError");
+
+            return false;
+
+        }
+
+        hideError("examCodeError");
+
+        return true;
+    }
+
+
+    return true;
+}
+
+
+/* ===============================
+   ERROR FUNCTIONS
+   =============================== */
+
+function showError(id) {
+
+    document
+        .getElementById(id)
+        .classList.add("show");
+
+}
+
+
+function hideError(id) {
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+
+}
+
+
+/* ===============================
+   BACK
+   =============================== */
+
+function goBack() {
+
+    window.history.back();
+
+}
+
+
+/* ===============================
+   START EXAM
+   =============================== */
+
+async function startExam() {
+
+    if (!validateStep(5)) {
+        return;
+    }
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const mobile = document.getElementById("mobile").value.trim();
+    const college = document.getElementById("college").value.trim();
+
+    const examCode = document
+        .getElementById("examCode")
+        .value
+        .trim()
+        .toUpperCase();
+
+    // Show checking message
+    const startButton = document.querySelector(
+        "#registrationStep5 button:last-child"
+    );
+
+    startButton.disabled = true;
+    startButton.textContent = "Checking...";
+
+    try {
+
+        // Check exam code in Supabase
+        const { data, error } = await supabaseClient
+            .from("exam_codes")
+            .select("*")
+            .eq("code", examCode)
+            .maybeSingle();
+
+        if (error) {
+            console.error("Supabase error:", error);
+
+            alert("Unable to verify exam code. Please try again.");
+
+            startButton.disabled = false;
+            startButton.textContent = "Start Exam";
+
+            return;
+        }
+
+        // Code does not exist
+        if (!data) {
+
+            alert("Invalid Exam Code.");
+
+            startButton.disabled = false;
+            startButton.textContent = "Start Exam";
+
+            return;
+        }
+
+        // Code already used
+        if (data.used === true) {
+
+            alert(
+                "This exam code has already been used. " +
+                "You cannot attempt the assessment again."
+            );
+
+            startButton.disabled = false;
+            startButton.textContent = "Start Exam";
+
+            return;
+        }
+
+        // Save candidate information
+        localStorage.setItem("candidateName", name);
+        localStorage.setItem("email", email);
+        localStorage.setItem("mobile", mobile);
+        localStorage.setItem("college", college);
+        localStorage.setItem("examCode", examCode);
+
+        // Open instructions
+        window.location.href = "instructions.html";
+
+    } catch (err) {
+
+        console.error(err);
+
+        alert("Something went wrong while checking the exam code.");
+
+        startButton.disabled = false;
+        startButton.textContent = "Start Exam";
+    }
+}
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/supabase.js"></script>
+</body>
+
+</html>
